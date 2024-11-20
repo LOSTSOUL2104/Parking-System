@@ -1,15 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SigninSignUp = () => {
-
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [isSignUp, setIsSignUp] = useState(true); // Toggle between SignIn and SignUp
+  const [isSignUp, setIsSignUp] = useState(true);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ const SigninSignUp = () => {
         response = await axios.post("http://localhost:4000/signup", data);
         if (response.data.success) {
           alert("SignUp successful!");
+          navigate("/");
         }
       } else {
         response = await axios.post("http://localhost:4000/login", {
@@ -35,10 +38,12 @@ const SigninSignUp = () => {
         });
         if (response.data.success) {
           alert("Login successful!");
+          navigate("/");
         }
       }
     } catch (err) {
       setError(err.response?.data?.errors || "An error occurred.");
+      console.error(err);
     }
   };
 
@@ -148,7 +153,7 @@ const SigninSignUp = () => {
               >
                 <option value="">Select a role</option>
                 <option value="admin">Admin</option>
-                <option value="user">User</option>
+                <option value="user">User </option>
               </select>
             </div>
           )}
