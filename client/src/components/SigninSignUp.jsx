@@ -26,13 +26,13 @@ const SigninSignUp = () => {
     try {
       let response;
       if (isSignUp) {
-        response = await axios.post("http://localhost:4000/signup", data);
+        response = await axios.post("http://localhost:5000/signup", data);
         if (response.data.success) {
           alert("SignUp successful!");
           navigate("/");
         }
       } else {
-        response = await axios.post("http://localhost:4000/login", {
+        response = await axios.post("http://localhost:5000/login", {
           email,
           password,
         });

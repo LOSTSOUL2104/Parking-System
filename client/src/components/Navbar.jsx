@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { User } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -22,7 +23,7 @@ const Navbar = () => {
             to="/SigninSignUp"
             className="text-white no-underline hover:underline"
           >
-            Sign In/Up
+            <User size={24} />
           </Link>
         </li>
       </ul>
