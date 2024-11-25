@@ -47,7 +47,7 @@ const ParkingSpace = () => {
     <div className="bg-gradient-to-br from-slate-900 to-emerald-900 min-h-screen flex items-center justify-center p-4">
       <div className="max-w-4xl w-full mx-auto bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl p-6">
         <div className="flex items-center justify-center mb-8">
-          <FaParking className="w-12 h-12 text-white mr-4" />
+          <FaParking className="+w-12 h-12 text-white mr-4" />
           <h1 className="text-white text-5xl font-extrabold tracking-tight">
             Parking Space Status
           </h1>

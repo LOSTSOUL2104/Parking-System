@@ -6,7 +6,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 
-const { authenticateToken, validateRequestBody } = require("./middleware/middleware");
+const {
+  authenticateToken,
+  validateRequestBody,
+} = require("./middleware/middleware");
 
 dotenv.config();
 
@@ -52,25 +55,20 @@ const parkingSpaceSchema = new mongoose.Schema({
 
 const ParkingSpace = mongoose.model("ParkingSpace", parkingSpaceSchema);
 
-app.get("/api/balance", authenticateToken, (req, res) => {
+app.get("/api/balance", (req, res) => {
   res.json({ totalBalance, availableBalance });
 });
 
-app.post(
-  "/api/add-funds",
-  authenticateToken,
-  validateRequestBody(["amount"]),
-  (req, res) => {
-    const { amount } = req.body;
-    if (amount > 0) {
-      totalBalance += amount;
-      availableBalance += amount;
-      res.json({ totalBalance, availableBalance });
-    } else {
-      res.status(400).json({ error: "Invalid amount" });
-    }
+app.post("/api/add-funds", validateRequestBody(["amount"]), (req, res) => {
+  const { amount } = req.body;
+  if (amount > 0) {
+    totalBalance += amount;
+    availableBalance += amount;
+    res.json({ totalBalance, availableBalance });
+  } else {
+    res.status(400).json({ error: "Invalid amount" });
   }
-);
+});
 
 app.post("/login", async (req, res) => {
   try {
